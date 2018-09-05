@@ -232,7 +232,7 @@ Server::setup_fd_for_listen(bool non_blocking, const NetProcessor::AcceptOptions
   if (opt.f_inbound_transparent) {
 #if TS_USE_TPROXY
     Debug("http_tproxy", "Listen port inbound transparency enabled.");
-    if (safe_setsockopt(fd, SOL_IP, TS_IP_TRANSPARENT, SOCKOPT_ON, sizeof(int)) < 0) {
+    if (safe_setsockopt(fd, TS_IP_TRANS_OPT_LEVEL, TS_IP_TRANS_OPT_NAME, SOCKOPT_ON, sizeof(int)) < 0) {
       Fatal("[Server::listen] Unable to set transparent socket option [%d] %s\n", errno, strerror(errno));
     }
 #else

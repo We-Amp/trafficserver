@@ -66,7 +66,7 @@
 #define TS_USE_KQUEUE @use_kqueue@
 #define TS_USE_PORT @use_port@
 #define TS_USE_POSIX_CAP @use_posix_cap@
-#define TS_USE_TPROXY @use_tproxy@
+#define TS_USE_TPROXY_LINUX @use_tproxy@
 #define TS_HAS_SO_MARK @has_so_mark@
 #define TS_HAS_IP_TOS @has_ip_tos@
 #define TS_USE_HWLOC @use_hwloc@
@@ -127,6 +127,23 @@
 #define TS_BUILD_CANONICAL_HOST "@host@"
 
 #define TS_BUILD_DEFAULT_LOOPBACK_IFACE "@default_loopback_iface@"
+#ifdef TS_USE_TPROXY_LINUX
+#ifndef USE_FREEBSD_TRANS
+#define TS_USE_TPROXY TS_USE_TPROXY_LINUX
+#define TS_IP_TRANS_OPT_LEVEL SOL_IP
+#define TS_IP_TRANS_OPT_NAME TS_IP_TRANSPARANT
+#endif
+#endif
+#ifdef USE_FREEBSD_TRANS
+#define TS_USE_TPROXY 1
+#define TS_IP_TRANS_OPT_LEVEL IPPROTO_IP
+#define TS_IP_TRANS_OPT_NAME IP_BINDANY
+#endif
+
+#ifndef TS_USE_TPROXY
+#define XTS_USE_TPROXY 0
+#endif
+
 /* clang-format on */
 
 #endif /* _ink_config_h */

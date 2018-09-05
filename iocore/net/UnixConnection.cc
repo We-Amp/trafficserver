@@ -261,7 +261,7 @@ Connection::open(NetVCOptions const &opt)
     static char const *const DEBUG_TEXT = "::open setsockopt() IP_TRANSPARENT";
 #if TS_USE_TPROXY
     int value = 1;
-    if (-1 == safe_setsockopt(fd, SOL_IP, TS_IP_TRANSPARENT, reinterpret_cast<char *>(&value), sizeof(value))) {
+    if (-1 == safe_setsockopt(fd, TS_IP_TRANS_OPT_LEVEL, TS_IP_TRANS_OPT_NAME, reinterpret_cast<char *>(&value), sizeof(value))) {
       Debug("socket", "%s - fail %d:%s", DEBUG_TEXT, errno, strerror(errno));
       return -errno;
     } else {

@@ -1084,7 +1084,7 @@ LocalManager::bindProxyPort(HttpProxyPort &port)
   if (port.m_inbound_transparent_p) {
 #if TS_USE_TPROXY
     Debug("http_tproxy", "Listen port %d inbound transparency enabled.", port.m_port);
-    if (setsockopt(port.m_fd, SOL_IP, TS_IP_TRANSPARENT, &one, sizeof(one)) == -1) {
+    if (setsockopt(port.m_fd, TS_IP_TRANS_OPT_LEVEL, TS_IP_TRANS_OPT_NAME, &one, sizeof(one)) == -1) {
       mgmt_fatal(0, "[bindProxyPort] Unable to set transparent socket option [%d] %s\n", errno, strerror(errno));
     }
 #else
