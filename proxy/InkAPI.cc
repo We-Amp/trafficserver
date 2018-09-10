@@ -9511,6 +9511,19 @@ TSHttpSsnClientProtocolStackContains(TSHttpSsn ssnp, const char *tag)
   return cs->protocol_contains(ts::StringView(tag));
 }
 
+TSReturnCode
+TSHttpTxnTunnel(TSHttpTxn txnp)
+{
+  // TODO(KS): we need to check whether we are in the TXN_START hook
+  HttpSM *sm                             = (HttpSM *)txnp;
+  sm->t_state.client_info.port_attribute = HttpProxyPort::TRANSPORT_BLIND_TUNNEL;
+  sm->t_state.method                     = HTTP_WKSIDX_GET;
+  sm->t_state.transparent_passthrough    = true;
+  TSReturnCode zret                      = TS_SUCCESS;
+  return zret;
+}
+
+
 const char *
 TSRegisterProtocolTag(const char *tag)
 {

@@ -2434,6 +2434,9 @@ tsapi const char *TSHttpSsnClientProtocolStackContains(TSHttpSsn ssnp, char cons
 tsapi const char *TSNormalizedProtocolTag(char const *tag);
 tsapi const char *TSRegisterProtocolTag(char const *tag);
 
+/// Set the transaction to go into blind tunnel mode, only from TXN_START
+tsapi TSReturnCode TSHttpTxnTunnel(TSHttpTxn txnp);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
