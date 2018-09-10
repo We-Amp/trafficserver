@@ -202,6 +202,10 @@ the installation with
    MAKE=gmake ./configure # make sure that gmake is the make we use
    gmake
 
+   To configure transparancy on freebsd define USE_FREEBSD_TRANS in
+   AM_CPPFLAGS and CPPFLAGS:
+   AM_CPPFLAGS=-DUSE_FREEBSD_TRANS CPPFLAGS=-DUSE_FREEBSD_TRANS ./configure
+
 5. INSTALLATION
 
   DEFAULT DIR                        CONTENTS
